@@ -7,11 +7,11 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server)
 
-const connection = require('./connection.js')
+const socketController = require('./socketController.js')
 
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'front')))
 
-io.sockets.on('connection', connection)
+io.sockets.on('connection', socketController)
 
 module.exports = server
