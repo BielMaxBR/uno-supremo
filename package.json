@@ -1,0 +1,25 @@
+{
+  "name": "uno-supremo",
+  "version": "1.0.0",
+  "description": "o jogo",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BielMaxBR/uno-supremo.git"
+  },
+  "author": "BielMaxBR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BielMaxBR/uno-supremo/issues"
+  },
+  "homepage": "https://github.com/BielMaxBR/uno-supremo#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "nodemon": "^2.0.7",
+    "socket.io": "^3.0.5"
+  }
+}
