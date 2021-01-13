@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cheia de manias</title>
+    <style>
+        body {
+            display: block;
+            margin-top: 5%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        canvas {
+            background: #000;
+            margin: auto;
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            Left: 0px;
+            right: 0px;
+            border: 10px solid grey;
+            /* image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            image-rendering: -moz-crisp-edges; */
+            width: 600px;
+            height: 600px;
+        }
+
+        #esquerda {
+            margin: auto;
+            float:left;
+            position:absolute;
+            bottom: 0px;
+            left: 0px;
+            margin-bottom: 10px;
+        }
+
+        #roomList {
+            border: 2px solid grey;
+            margin-bottom: 5px;
+        }
+
+        #createRoom {
+            border: 2px solid grey;
+            margin-top: 5px;
+        }
+
+        #name {
+            border: 2px solid grey;
+            margin-bottom: 5px;
+        }
+
+        #chat {    
+            margin: auto;
+            margin-bottom: 10px;
+            height: 320px;
+            border: 2px solid grey;
+            float: right;
+            width: 300px;
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+        }
+
+        #messages {
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul > :first-child {
+            margin-top: auto;
+        }
+
+        ul {
+            height: 300px;
+            list-style-type: none;
+            padding: inherit;
+            bottom: 47px;
+            top: 0px;
+            bottom: 0px;
+            Left: 0px;
+            right: 0px;
+            overflow-y: auto;
+            margin: auto; 
+        }
+
+        li {
+            margin-top: 5px;
+            font-size: small;
+            word-break: break-word;
+        }
+
+        .inputText {
+            width: -webkit-fill-available;
+        }
+        
+    </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+<link rel="icon" 
+      type="image/png" 
+      href="./favicon.png">
+</head>
+<body>
+    <div id="esquerda">
+        <div id="name">
+            <h2 style="margin: auto;">Nome Aqui</h2>
+            <input class="inputText" id="myname" placeholder="escreve um nome ae"/>
+        </div>
+        <div id="roomList">
+            <ul id="rooms"></ul>
+        </div>
+        <div id="createRoom">
+            <h2 style="margin: auto;">crie uma sala</h2>
+            <input class="inputText" id="myroom" placeholder="escreve uma sala ae"/>
+            <!-- <ul id="rooms"><li>sala1</li><li>sala2</li></ul> -->
+        </div>
+    </div>
+    <canvas id="view" width="256" height="256"></canvas>
+    <div id="chat">
+        <ul id="messages" tabindex="1"></ul>
+        <input class="inputText" id="mytext" placeholder="escreve algo ae"/>
+    </div>
+
+    <div style="display:none;">
+    <img id="source"
+        src="./sprites/obra.png">
+    </div>
+
+    <!-- <script src="https://pixijs.download/v5.3.6/pixi.min.js"></script> -->
+    <script src="./index.js"></script> 
+</body>
+</html>
