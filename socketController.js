@@ -1,4 +1,4 @@
 module.exports = function(socket) {
-    console.log('socket conectado')
+    console.log('Socket conectado')
     
 }
