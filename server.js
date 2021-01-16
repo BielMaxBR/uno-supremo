@@ -2,7 +2,9 @@ const app = require('./src/app')
 const fs = require('fs')
 fs.exists('./src/salas.json', function(exists){
     if (exists) {
-        fs.unlinkSync('./src/salas.json')
+        var obj = {}
+        var json = JSON.stringify(obj);
+        fs.writeFileSync(path='./src/salas.json', json);
     }
 })
 app.listen(process.env.PORT || 3333)
