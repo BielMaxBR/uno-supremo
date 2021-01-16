@@ -1,13 +1,3 @@
-try {
-    const ws = new WebSocket('wss://8080-e0e5ada3-0298-4380-8010-5074091bf40e.ws-us03.gitpod.io/');
-    ws.onopen = function () {
-        ws.send('ping')
-    };
-}
-catch (err) {
-    console.log(err)
-}
-
 const canvas = document.getElementById('view')
     ,ctx = canvas.getContext('2d')
     ,img = image = document.getElementById('source');
@@ -20,4 +10,13 @@ function draw() {
 setTimeout(draw,100)
 
 var server = io.connect(location.href);
+var connected = false
+server.on('connect',()=>{
+    connected = true
+})
 
+function createRoom(room) {
+    if (connected) {
+        server.emit('createRoom',room)
+    }
+}
