@@ -9,18 +9,18 @@ function draw() {
 
 setTimeout(draw,100)
 
-var io = io.connect(location.href);
-var connected = false
+const socket = io.connect(location.href);
+let connected = false
 
-var myName = ''
-var roomsOn = []
-io.on('connect',()=>{
+let myName = ''
+let roomsOn = []
+socket.on('connect',()=>{
     connected = true
 })
 
-io.on('updateRooms', (rooms) =>{
+socket.on('updateRooms', (rooms) =>{
     console.log(rooms)
-    var salas = document.getElementById('rooms')
+    let salas = document.getElementById('rooms')
     roomsOn = rooms
     salas.innerHTML = ''
     for ( sala in roomsOn ) {
@@ -32,7 +32,7 @@ io.on('updateRooms', (rooms) =>{
 
 function createRoom(room) {
     if (connected) {
-        io.emit('createRoom',room)
+        socket.emit('createRoom',room)
     }
 }
 
@@ -51,7 +51,7 @@ document.getElementById('myname').addEventListener('keyup', function(){
 });
 
 document.getElementById('myroom').addEventListener('keyup', function(e){
-    var key = e.code;
+    let key = e.code;
     if (key == "Enter") {
         createRoom(this.value)
         this.value = ""
