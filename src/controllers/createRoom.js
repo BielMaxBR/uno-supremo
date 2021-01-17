@@ -1,5 +1,7 @@
 const fs = require('fs')
 const prefix = '[CREATE] '
+const Sala = require('../Classes/RoomClass.js')
+
 module.exports = function(nome) {
     var obj = {}
     console.log(prefix+nome)
@@ -12,7 +14,7 @@ module.exports = function(nome) {
                 } else {
                     obj = JSON.parse(data);
                     console.log(prefix+obj)
-                    obj[nome] = {}
+                    obj[nome] = new Sala()
                     var json = JSON.stringify(obj); 
                     fs.writeFileSync('./src/salas.json', json);
                     console.log(prefix+json)

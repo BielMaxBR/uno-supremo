@@ -6,9 +6,10 @@ const getRooms = require('./controllers/getRooms.js')
 module.exports = async function(socket) {
     console.log('#################')
     console.log('Socket conectado')
+    
     await getRooms(socket)
     await socket.on('createRoom', createRoom)
-    // Example when handled through fs.watch() listener
+    
     fs.watch('./src/salas.json', (event, nome) => {
     if (nome) {
         if (event == 'change') {
@@ -18,7 +19,6 @@ module.exports = async function(socket) {
             catch(err) {
                 console.log(err)
             }
-
         }
     }
     });

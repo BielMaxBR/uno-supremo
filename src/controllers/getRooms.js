@@ -11,9 +11,12 @@ module.exports = async (socket) => {
                 } 
                 else {
                     salas = JSON.parse(data);
-                    console.log(prefix+Object.keys(salas))
-                    await socket.emit('updateRooms', Object.keys(salas))
-                    await socket.broadcast.emit('updateRooms', Object.keys(salas))
+                    
+                    if (Object.keys(salas).length > 0) {
+                        console.log(prefix+Object.keys(salas))
+                        await socket.emit('updateRooms', Object.keys(salas))
+                        await socket.broadcast.emit('updateRooms', Object.keys(salas))
+                    }
                 }
             });
         }
