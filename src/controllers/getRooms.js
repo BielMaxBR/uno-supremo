@@ -12,7 +12,8 @@ module.exports = async (socket) => {
                 else {
                     salas = JSON.parse(data);
                     console.log(prefix+Object.keys(salas))
-                    socket.broadcast.emit('updateRooms', Object.keys(salas))
+                    await socket.emit('updateRooms', Object.keys(salas))
+                    await socket.broadcast.emit('updateRooms', Object.keys(salas))
                 }
             });
         }

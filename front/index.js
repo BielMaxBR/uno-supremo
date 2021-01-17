@@ -1,3 +1,8 @@
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
 const canvas = document.getElementById('view')
     ,ctx = canvas.getContext('2d')
     ,img = image = document.getElementById('source');
@@ -24,9 +29,9 @@ socket.on('updateRooms', (rooms) =>{
     roomsOn = rooms
     salas.innerHTML = ''
     for ( sala in roomsOn ) {
-        salas.innerHTML += '<li>'+roomsOn[sala]
+        salas.innerHTML += '<li>'+'<div class=\'nomeSala\'>'+roomsOn[sala]+'</div>'
             +"<button style=\"\" onclick=\"connect(myName.toString(),\'"
-            +roomsOn[sala]+"\')\">Entrar</button>"+'</li>'
+            +roomsOn[sala]+' '+"\')\">Entrar</button>"+'</li>'
     }
 })
 
@@ -53,7 +58,20 @@ document.getElementById('myname').addEventListener('keyup', function(){
 document.getElementById('myroom').addEventListener('keyup', function(e){
     let key = e.code;
     if (key == "Enter") {
-        createRoom(this.value)
+        createRoom(this.value.trim())
+        this.value = ""
+    }
+});
+
+document.getElementById('mytext').addEventListener('keyup', function(e){
+    var key = e.code;
+    if (key == "Enter" && this.value != "") {
+        try{
+            chat(this.value)
+        }
+        catch(err) {
+            console.log(err)
+        }
         this.value = ""
     }
 });
