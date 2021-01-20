@@ -14,7 +14,7 @@ function draw() {
 
 setTimeout(draw,100)
 
-const socket = io.connect(location.href);
+const socket = io.connect("https://3333-e0e5ada3-0298-4380-8010-5074091bf40e.ws-us03.gitpod.io/");
 let connected = false
 
 let myName = ''
@@ -44,7 +44,7 @@ function createRoom(room) {
 function connect(name, sala) {
     if (name) {
         connected = true
-        socket.emit('addUser', name, sala)
+        socket.emit('addUser', name, sala.trim())
     }
     else {
         console.log('insira um nome')
