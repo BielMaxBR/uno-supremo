@@ -8,22 +8,26 @@ module.exports = async function(socket) {
     console.log('#################')
     console.log('Socket conectado')
     TotalPlayers.push(socket)
+    createRoom('sala')
     fs.watch('./src/salas.json', (event, nome) => {
-    setTimeout(()=>{
-        if (nome) {
-            if (event == 'change') {
-                try {
-                    getRooms(socket)
-                }
-                catch(err) {
-                    console.log(err)
-                }
+    if (nome) {
+        if (event == 'change') {
+            try {
+                console.log('wew!')
+                getRooms(async salas => {
+                    await socket.emit('updateRooms', [Object.keys(salas)])
+                    await socket.broadcast.emit('updateRooms', [Object.keys(salas)])
+                    console.log('wow!', salas)
+                })
+            }
+            catch(err) {
+                console.log(err)
             }
         }
-    },100)
+    }
+
     });
 
-    await getRooms(socket)
     await socket.on('createRoom', createRoom)
     await socket.on('addUser', (username, sala)=>{ addUser(username, sala, socket); console.log('addUser\n') })
     await socket.on('disconnect', ()=>{ 

@@ -13,11 +13,11 @@ module.exports = function(nome) {
                     console.log(prefix+err);
                 } else {
                     obj = JSON.parse(data);
-                    console.log(prefix+obj)
+                    // console.log(prefix+obj)
                     obj[nome] = new SalaClass()
                     var json = JSON.stringify(obj); 
                     fs.writeFileSync('./src/salas.json', json);
-                    console.log(prefix+json)
+                    // console.log(prefix+json)
                     return obj
                 }});
         } 
@@ -25,7 +25,7 @@ module.exports = function(nome) {
             obj[nome] = {}
             var json = JSON.stringify(obj);
             fs.writeFileSync(path='./src/salas.json', json);
-            console.log(prefix+json)
+            // console.log(prefix+json)
             return obj
         }
     });
