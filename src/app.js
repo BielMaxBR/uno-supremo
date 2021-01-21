@@ -14,7 +14,7 @@ const socketController = require('./socketController.js')
 // app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../front')))
 
-io.sockets.on('connection', socketController)
+io.sockets.on('connection', (socket) => {socketController(socket, io)})
 // wss.on('connection', function connection(ws) {
 //     console.log('Weebsocket conectado')
 //     ws.on('ping',()=>{

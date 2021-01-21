@@ -10,11 +10,11 @@ module.exports = (callback) => {
             salas = JSON.parse(data);
             
             callback(salas)
+
             if (Object.keys(salas).length > 0) {
                 console.log(prefix+Object.keys(salas))
             }
         
-            
         }
         
     })

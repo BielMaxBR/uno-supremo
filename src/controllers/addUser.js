@@ -10,10 +10,10 @@ module.exports = async (username, salaNome, socket)=>{
                     let ConfigSala = salas[salaNome.toString()]
 
                     if (Object.keys(ConfigSala.Players).length < ConfigSala.LimitPlayers) {
-                        ConfigSala.Players[username] = username
+                        ConfigSala.Players[username] = socket.id
                     }
                     else {
-                        ConfigSala.Spectators[username] = username
+                        ConfigSala.Spectators[username] = socket.id
                     }
                     ConfigSala.PlayerCards[username] = []
                     ConfigSala.Ready[username] = false

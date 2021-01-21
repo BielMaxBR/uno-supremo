@@ -19,6 +19,7 @@ let connected = false
 
 let myName = ''
 let roomsOn = []
+
 socket.on('connect',()=>{
     connected = true
 })
@@ -35,6 +36,11 @@ socket.on('updateRooms', (rooms) =>{
     }
 })
 
+socket.on('updateChat',(username, data) =>{
+    var chat = document.getElementById('messages')    
+    chat.innerHTML +="<li>"+"["+username+"]"+": "+data+"<li>"
+})
+
 function createRoom(room) {
     if (connected) {
         socket.emit('createRoom',room)
@@ -48,6 +54,12 @@ function connect(name, sala) {
     }
     else {
         console.log('insira um nome')
+    }
+}
+
+function chat(msg) {
+    if (connected) {
+        socket.emit('message', msg)
     }
 }
 
