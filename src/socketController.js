@@ -2,6 +2,7 @@ const fs = require('fs')
 const createRoom = require('./controllers/createRoom.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
+const deleteUser = require('./controllers/removeUser.js')
 
 var TotalPlayers = {}
 module.exports = async function(socket, io) {
@@ -11,6 +12,10 @@ module.exports = async function(socket, io) {
     TotalPlayers[socket.id] = socket
 
     createRoom('sala')
+    getRooms(async salas => {
+        await socket.emit('updateRooms', Object.keys(salas))
+        // console.log('wow!', salas)
+    })
 
     fs.watch('./src/salas.json', (event, nome) => {
     if (nome) {
@@ -20,7 +25,7 @@ module.exports = async function(socket, io) {
                 getRooms(async salas => {
                     await socket.emit('updateRooms', Object.keys(salas))
                     await socket.broadcast.emit('updateRooms', Object.keys(salas))
-                    console.log('wow!', salas)
+                    // console.log('wow!', salas)
                 })
             }
             catch(err) {
@@ -36,6 +41,7 @@ module.exports = async function(socket, io) {
     await socket.on('disconnect', ()=>{
         // disconnectPlayer
         delete TotalPlayers[socket.id]
+        deleteUser(socket)
     })
     await socket.on('message', msg => {
         io.to(socket.room).emit('updateChat', socket.username, msg)

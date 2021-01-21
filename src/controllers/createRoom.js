@@ -4,16 +4,16 @@ const SalaClass = require('../Classes/RoomClass.js')
 
 module.exports = function(nome) {
     var obj = {}
-    console.log(prefix+nome)
     fs.exists('./src/salas.json', async function(exists){
-        console.log(prefix+exists)
         if(exists){
             fs.readFile('./src/salas.json', function readFile(err, data){
                 if (err){
                     console.log(prefix+err);
                 } else {
                     obj = JSON.parse(data);
-                    if (obj[nome] != {}) {
+                    if (!obj[nome]) {
+                        console.log(prefix+nome)
+                        console.log(prefix+exists)
                         // console.log(prefix+obj)
                         obj[nome] = new SalaClass()
                         var json = JSON.stringify(obj); 
