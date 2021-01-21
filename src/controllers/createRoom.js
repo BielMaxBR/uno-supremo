@@ -13,12 +13,14 @@ module.exports = function(nome) {
                     console.log(prefix+err);
                 } else {
                     obj = JSON.parse(data);
-                    // console.log(prefix+obj)
-                    obj[nome] = new SalaClass()
-                    var json = JSON.stringify(obj); 
-                    fs.writeFileSync('./src/salas.json', json);
-                    // console.log(prefix+json)
-                    return obj
+                    if (obj[nome] != {}) {
+                        // console.log(prefix+obj)
+                        obj[nome] = new SalaClass()
+                        var json = JSON.stringify(obj); 
+                        fs.writeFileSync('./src/salas.json', json);
+                        // console.log(prefix+json)
+                        return obj
+                    }
                 }});
         } 
         else {
