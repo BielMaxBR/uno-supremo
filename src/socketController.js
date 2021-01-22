@@ -11,7 +11,7 @@ module.exports = async function(socket, io) {
 
     TotalPlayers[socket.id] = socket
 
-    createRoom('sala')
+    // createRoom('sala')
     getRooms(async salas => {
         await socket.emit('updateRooms', Object.keys(salas))
         // console.log('wow!', salas)
