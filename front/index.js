@@ -36,9 +36,13 @@ socket.on('updateRooms', (rooms) =>{
     }
 })
 
-socket.on('updateChat',(username, data) =>{
-    var chat = document.getElementById('messages')    
-    chat.innerHTML +="<li>"+"["+username+"]"+": "+data+"<li>"
+socket.on('updateChat',(username, data, color) =>{
+    var chat = document.getElementById('messages')
+    var style = ''
+    if(color) {
+        style = 'style=\"color:'+color+'\"'
+    }
+    chat.innerHTML +="<li "+style+">"+"["+username+"]"+": "+data+"<li>"
 })
 
 function createRoom(room) {
