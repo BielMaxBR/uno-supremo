@@ -5,6 +5,7 @@ fs.exists('./src/salas.json', function(exists){
     var json = JSON.stringify(obj);
     fs.writeFileSync(path='./src/salas.json', json);
 })
-app.listen(process.env.PORT || 3333)
+const porta = process.env.PORT || 3333
+app.listen(porta)
 
-console.log('escutando na porta 3333')
+console.log('escutando na porta '+porta.toString())
