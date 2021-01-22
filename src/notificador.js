@@ -7,10 +7,10 @@ module.exports = (socket,sala,tipo, ...args) => {
             socket.to(sala).emit('updateChat', "SERVER", args[0].toString()+" saiu na sala", 'blue')
             break;
         case "enterRoom":
-            socket.emit('updateChat', "SERVER", "você entrou em "+args[0].toString(), 'green')
+            socket.emit('updateChat', "SERVER", "você entrou em "+sala, 'green')
             break;
         case "leaveRoom":
-            socket.emit('updateChat', "SERVER", "você saiu de "+args[0].toString(), 'green')
+            socket.emit('updateChat', "SERVER", "você saiu de "+sala, 'red')
             break;
         case "myTurn":
             socket.emit('updateChat', "SERVER", "agora é seu turno", 'yellow')

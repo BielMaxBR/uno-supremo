@@ -29,6 +29,7 @@ module.exports = async (username, salaNome, socket)=>{
 
                     fs.writeFileSync('./src/salas.json', json);
                     notifier(socket,socket.room,'addUser', username)
+                    notifier(socket,socket.room,'enterRoom')
                 }
                 else {
                     console.log(err)

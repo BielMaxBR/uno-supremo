@@ -1,5 +1,6 @@
 const fs = require('fs')
 const SalaClass = require('../Classes/RoomClass.js')
+const notifier = require('../notificador.js')
 
 module.exports = async (socket)=>{
     const salaNome = socket.room

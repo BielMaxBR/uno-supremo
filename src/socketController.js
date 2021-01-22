@@ -2,7 +2,7 @@ const fs = require('fs')
 const createRoom = require('./controllers/createRoom.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
-const deleteUser = require('./controllers/removeUser.js')
+const removeUser = require('./controllers/removeUser.js')
 
 var TotalPlayers = {}
 module.exports = async function(socket, io) {
@@ -41,7 +41,7 @@ module.exports = async function(socket, io) {
     await socket.on('disconnect', ()=>{
         // disconnectPlayer
         delete TotalPlayers[socket.id]
-        deleteUser(socket)
+        removeUser(socket)
     })
     await socket.on('message', msg => {
         io.to(socket.room).emit('updateChat', socket.username, msg)
