@@ -14,7 +14,7 @@ function draw() {
 
 setTimeout(draw,100)
 
-const socket = io.connect("https://3333-e0e5ada3-0298-4380-8010-5074091bf40e.ws-us03.gitpod.io/");
+const socket = io.connect(location.href);
 let connected = false
 
 let myName = ''
