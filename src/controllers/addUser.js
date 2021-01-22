@@ -1,5 +1,6 @@
 const fs = require('fs')
 const SalaClass = require('../Classes/RoomClass.js')
+const notifier = require('../notificador.js')
 
 module.exports = async (username, salaNome, socket)=>{
     fs.exists('./src/salas.json', async function(exists){
@@ -27,6 +28,7 @@ module.exports = async (username, salaNome, socket)=>{
                     let json = JSON.stringify(salas)
 
                     fs.writeFileSync('./src/salas.json', json);
+                    notifier(socket,socket.room,'addUser', username)
                 }
                 else {
                     console.log(err)
