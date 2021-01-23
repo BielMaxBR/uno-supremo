@@ -22,11 +22,11 @@ module.exports = async (socket)=>{
                     delete ConfigSala.PlayerCards[username]
                     delete ConfigSala.Ready[username]
 
+                    notifier(socket,socket.room,"removeUser", username)
                     socket.leave(socket.room)
                     console.log('[REMOVE] ',socket.username)
                     salas[salaNome] = new SalaClass(ConfigSala)
                     let json = JSON.stringify(salas)
-
                     fs.writeFileSync('./src/salas.json', json);
                 }
                 else {

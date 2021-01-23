@@ -1,8 +1,15 @@
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
+
 const fs = require('fs')
 const prefix = '[CREATE] '
 const SalaClass = require('../Classes/RoomClass.js')
+const notifier = require('../notificador.js')
 
-module.exports = function(nome) {
+module.exports = function(nome, socket) {
     var obj = {}
     fs.exists('./src/salas.json', async function(exists){
         if(exists){
@@ -11,7 +18,9 @@ module.exports = function(nome) {
                     console.log(prefix+err);
                 } else {
                     obj = JSON.parse(data);
-                    if (!obj[nome]) {
+                    if (obj[nome]) { notifier(socket,socket.id,"error","essa sala já existe") } 
+                    else if(nome.trim() == '') { notifier(socket,socket.id,"error","insira um nome na sala") }
+                    else {
                         console.log(prefix+nome)
                         console.log(prefix+exists)
                         // console.log(prefix+obj)
@@ -20,7 +29,8 @@ module.exports = function(nome) {
                         fs.writeFileSync('./src/salas.json', json);
                         // console.log(prefix+json)
                         return obj
-                    }
+
+                    } 
                 }});
         } 
         else {

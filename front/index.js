@@ -39,10 +39,15 @@ socket.on('updateRooms', (rooms) =>{
 socket.on('updateChat',(username, data, color) =>{
     var chat = document.getElementById('messages')
     var style = ''
+    var background = ''
+    if (color == "yellow" || color == "red") {
+        background = 'background: black;'
+    }
     if(color) {
-        style = 'style=\"color:'+color+'\"'
+        style = 'style=\"color:'+color+'; '+background+'\"'
     }
     chat.innerHTML +="<li "+style+">"+"["+username+"]"+": "+data+"<li>"
+    chat.scrollTop = chat.scrollHeight;
 })
 
 function createRoom(room) {
@@ -52,13 +57,9 @@ function createRoom(room) {
 }
 
 function connect(name, sala) {
-    if (name) {
-        connected = true
-        socket.emit('addUser', name, sala.trim())
-    }
-    else {
-        console.log('insira um nome')
-    }
+    connected = true
+    socket.emit('addUser', name, sala.trim())
+    
 }
 
 function chat(msg) {

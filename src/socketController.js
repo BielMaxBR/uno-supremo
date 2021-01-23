@@ -36,7 +36,7 @@ module.exports = async function(socket, io) {
 
     });
 
-    await socket.on('createRoom', createRoom)
+    await socket.on('createRoom', nome => {createRoom(nome,socket)})
     await socket.on('addUser', (username, sala)=>{ addUser(username, sala, socket); console.log('addUser\n') })
     await socket.on('disconnect', ()=>{
         // disconnectPlayer
