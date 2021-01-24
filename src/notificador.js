@@ -1,10 +1,10 @@
 module.exports = (socket,sala,tipo, ...args) => {
     switch(tipo) {
         case "addUser":
-            socket.to(sala).emit('updateChat', "SERVER", args[0].toString()+" entrou na sala", 'blue')
+            socket.to(sala).emit('updateChat', "SERVER", args[0].toString()+" entrou nessa sala", 'blue')
             break;
         case "removeUser":
-            socket.to(sala).emit('updateChat', "SERVER", args[0]+" saiu na sala", 'blue')
+            socket.to(sala).emit('updateChat', "SERVER", args[0]+" saiu nessa sala", 'blue')
             break;
         case "enterRoom":
             socket.emit('updateChat', "SERVER", "você entrou em "+sala, 'green')

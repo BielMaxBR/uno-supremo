@@ -19,7 +19,7 @@ let connected = false
 
 let myName = ''
 let roomsOn = []
-
+let usersOn = []
 socket.on('connect',()=>{
     connected = true
 })
@@ -33,6 +33,20 @@ socket.on('updateRooms', (rooms) =>{
         salas.innerHTML += '<li>'+'<div class=\'nomeSala\'>'+roomsOn[sala]+'</div>'
             +"<button style=\"\" onclick=\"connect(myName.toString(),\'"
             +roomsOn[sala]+' '+"\')\">Entrar</button>"+'</li>'
+    }
+})
+
+socket.on('updateUsers', playersList =>{
+    console.log(typeof playersList)
+    var players = playersList
+    if (typeof playersList == "string") {
+        players = [playersList]
+    }
+    usersOn = players
+    let userList = document.getElementById('users')
+    userList.innerHTML = ''
+    for ( use in usersOn ) {
+        userList.innerHTML += '<li>'+'<div class=\'nomeUser\'>'+usersOn[use]+'</div>'+'</li>'
     }
 })
 

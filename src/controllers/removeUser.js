@@ -2,7 +2,7 @@ const fs = require('fs')
 const SalaClass = require('../Classes/RoomClass.js')
 const notifier = require('../notificador.js')
 
-module.exports = async (socket)=>{
+module.exports = async (socket, callback)=>{
     const salaNome = socket.room
     const username = socket.username
     fs.exists('./src/salas.json', async function(exists){
@@ -21,13 +21,14 @@ module.exports = async (socket)=>{
                     }
                     delete ConfigSala.PlayerCards[username]
                     delete ConfigSala.Ready[username]
-
+                    delete ConfigSala.TotalUsers[username]
                     notifier(socket,socket.room,"removeUser", username)
                     socket.leave(socket.room)
                     console.log('[REMOVE] ',socket.username)
                     salas[salaNome] = new SalaClass(ConfigSala)
                     let json = JSON.stringify(salas)
                     fs.writeFileSync('./src/salas.json', json);
+                    if (callback) { callback(salas,socket.room) }
                 }
                 else {
                     console.log(err)

@@ -1,5 +1,6 @@
 module.exports = function(Configs) {
     if (!Configs) {
+        this.TotalUsers = {}
         this.LimitPlayers = 4
         this.Turn = 0
         this.Direction = 1
@@ -11,6 +12,7 @@ module.exports = function(Configs) {
         this.Baralho = criarBaralho()
         this.Playing = false
     } else {
+        this.TotalUsers = Configs.TotalUsers
         this.LimitPlayers = Configs.LimitPlayers
         this.Turn = Configs.Turn
         this.Direction = Configs.Direction
@@ -21,7 +23,6 @@ module.exports = function(Configs) {
         this.TopCard = Configs.TopCard 
         this.Baralho = Configs.Baralho 
         this.Playing = Configs.Playing
-
     }
 
     function criarBaralho() {

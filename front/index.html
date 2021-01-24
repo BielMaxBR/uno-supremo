@@ -36,7 +36,15 @@
             margin-left: 1%;
             text-decoration: underline;
         }
-
+        #direita {
+            margin: auto;
+            float:right;
+            position:absolute;
+            bottom: 0px;
+            right: 0px;
+            margin-bottom: 1%;
+            margin-right: 1%;
+        }
         #roomList {
             border: 2px solid grey;
             margin-bottom: 5px;
@@ -52,15 +60,18 @@
             margin-bottom: 5px;
         }
 
+        #usersList {
+            border: 2px solid grey;
+            margin-bottom: 5px;
+            width: 150px;
+            margin-left: 150px;
+        }
+
         #chat {    
-            margin: auto;
-            margin-bottom: 1%;
-            margin-right: 1%;
+            margin-top: 5px;
             height: 320px;
             border: 2px solid grey;
-            float: right;
-            width: 300px;
-            position: fixed;
+            width: 300px; 
             bottom: 0px;
             right: 0px;
             font-size: small;
@@ -134,9 +145,15 @@
         </div>
     </div>
     <canvas id="view" width="256" height="256"></canvas>
-    <div id="chat">
-        <ul id="messages" tabindex="1"></ul>
-        <input class="inputText" id="mytext" placeholder="escreve algo ae"/>
+    <div id="direita">
+        <div id="usersList">
+            <h2 style="margin: auto;border-bottom: 2px solid grey;">users</h2>
+            <ul id="users"></ul>
+        </div>
+        <div id="chat">
+            <ul id="messages" tabindex="1"></ul>
+            <input class="inputText" id="mytext" placeholder="escreve algo ae"/>
+        </div>
     </div>
 
     <div style="display:none;">
