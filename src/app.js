@@ -10,7 +10,8 @@ const bodyParser = require('body-parser')
 
 const socketController = require('./socketController.js')
     // ,wss = new WebSocket.Server({ port: 8080 })
-
+const router = express.Router()
+app.use(`/.netlify/functions/api`, router);
 // app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../front')))
 
