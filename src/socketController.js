@@ -3,12 +3,14 @@ const createRoom = require('./controllers/createRoom.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
 const removeUser = require('./controllers/removeUser.js')
+const redis = require('./redis-client.js')
 
-var TotalPlayers = {}
+
 module.exports = async function(socket, io) {
-    console.log('#################')
     console.log('Socket conectado')
-
+    const TotalPlayers = await redis.get('PlayerList')
+    TotalPlayers[socket.id] = socket
+    await redis.set('PlayerLists', TotalPlayers)
     TotalPlayers[socket.id] = socket
 
     // createRoom('sala')

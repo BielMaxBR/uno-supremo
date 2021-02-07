@@ -8,4 +8,4 @@ fs.exists('./src/salas.json', function(exists){
 const porta = process.env.PORT || 3333
 app.listen(porta)
 
-console.log('escutando na porta '+porta.toString())
+console.log('Escutando na porta '+porta.toString())
