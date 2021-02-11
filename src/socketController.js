@@ -3,19 +3,19 @@ const createRoom = require('./controllers/createRoom.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
 const removeUser = require('./controllers/removeUser.js')
-const redis = require('./redis-client.js')
+const { client, jsonCache } = require('./redis-client.js')
 
 
 module.exports = async function(socket, io) {
     console.log('Socket conectado')
-    // await redis.del('PlayerLists')
-    if (await redis.get('PlayerLists') == null || await redis.get('PlayerLists') == {}) {
-        let newId = socket.id
-        let newList = {}
-        newList[newId] = newId
-        await redis.set('PlayerLists', newList)
-    }
-    console.log(await redis.get('PlayerLists'))
+    // await client.del('PlayerLists')
+    let newId = socket.id
+    await client.lpush('PlayerLists', newId)
+
+    await client.lrange('PlayerLists', 0 , -1, async (err, data)=>{
+        
+        console.log(data)
+    })
 
     // createRoom('sala')
     getRooms(async salas => {
@@ -47,6 +47,7 @@ module.exports = async function(socket, io) {
     await socket.on('disconnect', ()=>{
         // disconnectPlayer
         // delete TotalPlayers[socket.id]
+        client.lrem('PlayerLists', 1, socket.id)
         removeUser(socket)
     })
     await socket.on('message', msg => {

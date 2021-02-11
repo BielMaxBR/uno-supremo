@@ -12,4 +12,4 @@ client.on('ready', ()=>{
     console.log('redis conectado')
 })
 
-module.exports = jsonCache
+module.exports = {client,jsonCache}
