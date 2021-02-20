@@ -4,41 +4,28 @@ if (!String.prototype.trim) {
   };
 }
 
-const fs = require('fs')
+
 const prefix = '[CREATE] '
 const SalaClass = require('../Classes/RoomClass.js')
-const notifier = require('../notificador.js')
+
+const { client, jsonCache } = require('../redis-client.js')
+const resEnum = {"EXIST":0, "EMPTY":1, "ERRO":2}
 
 module.exports = function(nome, socket) {
-    var obj = {}
-    fs.exists('./src/salas.json', async function(exists){
-        if(exists){
-            fs.readFile('./src/salas.json', function readFile(err, data){
-                if (err){
-                    console.log(prefix+err);
-                } else {
-                    obj = JSON.parse(data);
-                    if (obj[nome]) { notifier(socket,socket.id,"error","essa sala já existe") } 
-                    else if(nome.trim() == '') { notifier(socket,socket.id,"error","insira um nome na sala") }
-                    else {
-                        console.log(prefix+nome)
-                        console.log(prefix+exists)
-                        // console.log(prefix+obj)
-                        obj[nome] = new SalaClass()
-                        var json = JSON.stringify(obj); 
-                        fs.writeFileSync('./src/salas.json', json);
-                        // console.log(prefix+json)
-                        return obj
-
-                    } 
-                }});
-        } 
-        else {
-            obj[nome] = {}
-            var json = JSON.stringify(obj);
-            fs.writeFileSync(path='./src/salas.json', json);
-            // console.log(prefix+json)
-            return obj
+    let obj = {}
+    client.lrange('Rooms', 0 , -1, async (err, data) =>{
+        if (err){
+            console.log(prefix+err);
+            return new Promisse((res, rej)=>{ res(resEnum.ERRO) })
         }
-    });
+        if (!data) {
+            obj = data
+        }
+        if (obj[nome]) { return new Promisse((res, rej)=>{ res(resEnum.EXIST) }) } 
+        else if(nome.trim() == '') { return new Promisse((res, rej)=>{ res(resEnum.EMPTY) }) }
+        obj[nome] = new SalaClass()
+        await jsonCache.set('Rooms', obj)
+        return new Promisse((res, rej)=>{ res(obj) })
+    })
+    
 }

@@ -1,0 +1,48 @@
+#corpo{
+    background-color: rgb(53, 166, 166);
+ }
+ 
+ #box{
+     background-color: rgb(34, 109, 99);
+     width: 650px;
+     height: 600px;;
+     margin-left: auto;
+     margin-right: auto;
+     border-radius: 10px; 
+     padding: 10px 10px;
+     text-align: center;
+     font-size: 16px;
+ }
+ 
+ #box input{
+     border:1px solid rgb(0, 0, 0);
+     border-radius: 5px;
+     padding: 4px;
+ }
+ 
+ .padrao{
+     text-align: left;
+     margin: 20px;
+     margin-left: 40px;   
+ }
+
+ .botao button{
+    border-radius: 7px;
+    border:1px solid black;
+    color: white;
+    top: 400px;
+    position: relative;
+    background-color:rgb(53, 166, 166);
+    padding: 6px;
+    margin-left: 15px;
+ }
+
+ .botao button:hover{
+    background:  rgb(25, 79, 71);
+    cursor:pointer;
+ }
+
+ .Config{
+    left:-130px;
+    position: relative;
+ }

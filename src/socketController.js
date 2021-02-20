@@ -4,7 +4,7 @@ const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
 const removeUser = require('./controllers/removeUser.js')
 const { client, jsonCache } = require('./redis-client.js')
-
+const notifier = require('./notificador.js')
 
 module.exports = async function(socket, io) {
     console.log('Socket conectado')
@@ -42,7 +42,24 @@ module.exports = async function(socket, io) {
 
     });
 
-    await socket.on('createRoom', nome => {createRoom(nome,socket)})
+    await socket.on('createRoom', async nome => {await createRoom(nome).then(res=>{
+        switch(res) {
+            case 0:
+                notifier(socket,socket.id,"error","essa sala já existe")
+                break;
+            case 1:
+                notifier(socket,socket.id,"error","insira um nome na sala")
+                break;
+            case 2:
+                notifier(socket,socket.id,"error","ocorreu um erro no servidor")
+                break;
+            default:
+                console.log(res)
+                break;
+        }
+
+    })})
+
     await socket.on('addUser', (username, sala)=>{ addUser(username, sala, socket); console.log('addUser\n') })
     await socket.on('disconnect', ()=>{
         // disconnectPlayer
