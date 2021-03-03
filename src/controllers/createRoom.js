@@ -27,8 +27,8 @@ module.exports = async function(nome) {
 
         
     console.log(nome)
-    if(nome.trim() == '') { return new Promise((res, rej)=>{ res(resEnum.EMPTY) }) }
-    if (obj[nome] =! undefined) { return new Promise((res, rej)=>{ res(resEnum.EXIST) }) } 
+    if(nome.trim().length == 0) { return new Promise((res, rej)=>{ res(resEnum.EMPTY) }) }
+    if (obj[nome] != undefined) { return new Promise((res, rej)=>{ res(resEnum.EXIST) }) } 
     
     obj[nome] = `${new SalaClass()}`
     console.log(obj)
