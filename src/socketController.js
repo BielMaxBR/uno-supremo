@@ -54,11 +54,12 @@ module.exports = async function(socket, io) {
                 notifier(socket,socket.id,"error","ocorreu um erro no servidor")
                 break;
             default:
-                console.log(res)
+                console.log("outro: ",res)
                 break;
-        }
+            }
 
-    })})
+        })
+    })
 
     await socket.on('addUser', (username, sala)=>{ addUser(username, sala, socket); console.log('addUser\n') })
     await socket.on('disconnect', ()=>{
