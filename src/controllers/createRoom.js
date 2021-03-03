@@ -13,28 +13,28 @@ const resEnum = {"EXIST":0, "EMPTY":1, "ERRO":2}
 
 module.exports = async function(nome) {
     let obj = {}
-    const {err, data} = await client.hgetall('Rooms',(err,data)=>{ return {err,data} })
-    
-    if (err){
-            console.log(prefix+err);
-            return new Promisse((res, rej)=>{ res(resEnum.ERRO) })
-    }
+    return new Promise( resolve =>{ 
+        client.hgetall('Rooms', async (err,data)=>{
+            if (err){
+                console.log(prefix+err);
+                return new Promisse((res, rej)=>{ res(resEnum.ERRO) })
+            }
+            
+            console.log("tem: ", data)
+            if (data) {
+                obj = data
+            }
 
-    if (data) {
-        obj = data
-        console.log(data)
-    }
-
-        
-    console.log(nome)
-    if(nome.trim().length == 0) { return new Promise((res, rej)=>{ res(resEnum.EMPTY) }) }
-    if (obj[nome] != undefined) { return new Promise((res, rej)=>{ res(resEnum.EXIST) }) } 
-    
-    obj[nome] = `${new SalaClass()}`
-    console.log(obj)
-    
-    await client.hmset('Rooms', obj)
-    return new Promise((res, rej)=>{ res(obj) })
-    
-    
+            console.log(obj[nome])
+            if(nome.trim().length == 0) { resolve(resEnum.EMPTY);console.log('EMPTY')  }
+            if (obj[nome] != undefined) { resolve(resEnum.EXIST);console.log('EXIST')  } 
+            
+            obj[nome] = `${new SalaClass()}`
+            console.log(obj)
+            
+            await client.hmset('Rooms', obj)
+            resolve(obj) 
+            
+        })
+    })
 }
