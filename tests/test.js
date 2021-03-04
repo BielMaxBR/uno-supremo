@@ -12,6 +12,6 @@ client.on('ready', ()=>{
     console.log('redis conectado')
     client.del('PlayerLists')
     const obj = {'foo':'foo'}
-    client.hmset('Rooms', obj)
+    client.del('Rooms')
     client.quit()
 })

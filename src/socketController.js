@@ -3,7 +3,7 @@ const createRoom = require('./controllers/createRoom.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
 const removeUser = require('./controllers/removeUser.js')
-const { client, jsonCache } = require('./redis-client.js')
+const client = require('./redis-client.js')
 const notifier = require('./notificador.js')
 
 module.exports = async function(socket, io) {
@@ -23,25 +23,20 @@ module.exports = async function(socket, io) {
         // console.log('wow!', salas)
     })
 
-    fs.watch('./src/salas.json', (event, nome) => {
-    if (nome) {
-        if (event == 'change') {
-            try {
-                console.log('wew!')
-                getRooms(async salas => {
-                    await socket.emit('updateRooms', Object.keys(salas))
-                    await socket.broadcast.emit('updateRooms', Object.keys(salas))
-                    // console.log('wow!', salas)
-                })
-            }
-            catch(err) {
-                console.log(err)
-            }
+    function updateRooms() {
+        try {
+            console.log('wew!')
+            getRooms(async salas => {
+                await socket.emit('updateRooms', Object.keys(salas))
+                await socket.broadcast.emit('updateRooms', Object.keys(salas))
+                // console.log('wow!', salas)
+            })
+        }
+        catch(err) {
+            console.log(err)
         }
     }
-
-    });
-
+    
     await socket.on('createRoom', async nome => {await createRoom(nome).then(res=>{
         switch(res) {
             case 0:
@@ -55,6 +50,7 @@ module.exports = async function(socket, io) {
                 break;
             default:
                 console.log("outro: ",res)
+                updateRooms()
                 break;
             }
 

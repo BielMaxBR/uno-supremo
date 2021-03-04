@@ -30,9 +30,9 @@ socket.on('updateRooms', (rooms) =>{
     roomsOn = rooms
     salas.innerHTML = ''
     for ( sala in roomsOn ) {
-        salas.innerHTML += '<li>'+'<div class=\'nomeSala\'>'+roomsOn[sala]+'</div>'
+        salas.innerHTML += '<li>'
             +"<button style=\"\" onclick=\"connect(myName.toString(),\'"
-            +roomsOn[sala]+' '+"\')\">Entrar</button>"+'</li>'
+            +roomsOn[sala]+' '+"\')\">Entrar</button>"+'<div class=\'nomeSala\'>'+roomsOn[sala]+'</div>'+'</li>'
     }
 })
 

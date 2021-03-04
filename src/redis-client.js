@@ -7,10 +7,10 @@ let client    = redis.createClient({
     host      : process.env.REDIS_HOST, 
     password  : process.env.REDIS_PASSWORD,
   });
-let jsonCache = new JSONCache(client)
+
 client.on('ready', ()=>{
     console.log('redis conectado')
     client.del('PlayerLists')
 })
 
-module.exports = {client,jsonCache}
+module.exports = client

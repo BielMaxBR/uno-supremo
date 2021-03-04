@@ -8,7 +8,7 @@ if (!String.prototype.trim) {
 const prefix = '[CREATE] '
 const SalaClass = require('../Classes/RoomClass.js')
 
-const { client, jsonCache } = require('../redis-client.js')
+const client = require('../redis-client.js')
 const resEnum = {"EXIST":0, "EMPTY":1, "ERRO":2}
 
 module.exports = async function(nome) {
