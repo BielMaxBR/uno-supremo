@@ -29,7 +29,7 @@ module.exports = async function(nome) {
             if(nome.trim().length == 0) { resolve(resEnum.EMPTY);console.log('EMPTY')  }
             if (obj[nome] != undefined) { resolve(resEnum.EXIST);console.log('EXIST')  } 
             
-            obj[nome] = `${new SalaClass()}`
+            obj[nome] = JSON.stringify(new SalaClass())
             console.log(obj)
             
             await client.hmset('Rooms', obj)

@@ -1,4 +1,5 @@
 let redis = require('redis')
+const {promisify} = require('util');
 
 require('dotenv').config();
 
@@ -8,10 +9,9 @@ let client    = redis.createClient({
     password  : process.env.REDIS_PASSWORD,
   });
 
-client.on('ready', ()=>{
+client.on('ready', async ()=>{
     console.log('redis conectado')
     client.del('PlayerLists')
-    const obj = {'foo':'foo'}
     client.del('Rooms')
     client.quit()
 })

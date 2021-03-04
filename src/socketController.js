@@ -8,7 +8,7 @@ const notifier = require('./notificador.js')
 
 module.exports = async function(socket, io) {
     console.log('Socket conectado')
-    // await client.del('PlayerLists')
+    socket.room = ''
     let newId = socket.id
     await client.lpush('PlayerLists', newId)
 
