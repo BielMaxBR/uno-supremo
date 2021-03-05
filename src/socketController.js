@@ -61,7 +61,12 @@ module.exports = async function(socket, io) {
         // disconnectPlayer
         // delete TotalPlayers[socket.id]
         client.lrem('PlayerLists', 1, socket.id)
-        removeUser(socket)
+        removeUser(socket, (sala, nome) =>{
+            if (Object.keys(sala.TotalUsers).length == 0) {
+                client.hdel('Rooms', nome)
+                updateRooms()
+            }
+        })
     })
     await socket.on('message', msg => {
         io.to(socket.room).emit('updateChat', socket.username, msg)

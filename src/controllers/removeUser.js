@@ -31,7 +31,7 @@ module.exports = async (socket, callback)=>{
             console.log('[REMOVE] ',socket.username)
 
             client.hset('Rooms',salaNome, JSON.stringify(ConfigSala))
-            if (callback) { callback(salas,socket.room) }
+            if (callback) { callback(ConfigSala, salaNome) }
         }
         else {
             console.log(err)
