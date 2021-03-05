@@ -1,9 +1,12 @@
+const notifier = require('./notificador.js')
+const client = require('./redis-client.js')
+
 const createRoom = require('./controllers/createRoom.js')
+const removeUser = require('./controllers/removeUser.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
-const removeUser = require('./controllers/removeUser.js')
-const client = require('./redis-client.js')
-const notifier = require('./notificador.js')
+
+const checkReady = require('./game/checkReady.js')
 
 module.exports = async function(socket, io) {
     console.log('Socket conectado')
@@ -56,7 +59,10 @@ module.exports = async function(socket, io) {
         })
     })
 
+    await socket.on('Ready', () =>{ checkReady(socket) })
+
     await socket.on('addUser', (username, sala)=>{ addUser(username, sala, socket); console.log('addUser\n') })
+    
     await socket.on('disconnect', ()=>{
         // disconnectPlayer
         // delete TotalPlayers[socket.id]

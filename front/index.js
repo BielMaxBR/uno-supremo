@@ -82,6 +82,12 @@ function chat(msg) {
     }
 }
 
+function ready() {
+    if (connected) {
+        socket.emit('Ready')
+    }
+}
+
 document.getElementById('myname').addEventListener('keyup', function(){
     myName = this.value
 });
