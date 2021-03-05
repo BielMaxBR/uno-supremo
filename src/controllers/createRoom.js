@@ -17,7 +17,7 @@ module.exports = async function(nome) {
         client.hgetall('Rooms', async (err,data)=>{
             if (err){
                 console.log(prefix+err);
-                return new Promisse((res, rej)=>{ res(resEnum.ERRO) })
+                return new Promisse((res)=>{ res(resEnum.ERRO) })
             }
             
             console.log("tem: ", data)

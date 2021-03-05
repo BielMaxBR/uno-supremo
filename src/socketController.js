@@ -1,4 +1,3 @@
-const fs = require('fs')
 const createRoom = require('./controllers/createRoom.js')
 const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')

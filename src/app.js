@@ -1,12 +1,11 @@
-const bodyParser = require('body-parser')
-    ,socketIo = require('socket.io')
+const socketIo = require('socket.io')
     ,express = require('express')
     ,path = require('path')
     ,http = require('http')
     ,app = express()
     ,server = http.createServer(app)
     ,io = socketIo(server)
-    ,WebSocket = require('ws');
+
 
 const socketController = require('./socketController.js')
     // ,wss = new WebSocket.Server({ port: 8080 })

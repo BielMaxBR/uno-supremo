@@ -1,5 +1,4 @@
 let redis = require('redis')
-const {promisify} = require('util');
 
 require('dotenv').config();
 

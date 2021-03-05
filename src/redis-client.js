@@ -1,5 +1,5 @@
 let redis = require('redis')
-const JSONCache = require('redis-json')
+
 require('dotenv').config();
 
 let client    = redis.createClient({

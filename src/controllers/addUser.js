@@ -5,10 +5,8 @@ if (!String.prototype.trim) {
 }
 
 const client = require('../redis-client.js')
-const SalaClass = require('../Classes/RoomClass.js')
 const notifier = require('../notificador.js')
 const removeUser = require('./removeUser.js')
-const getRooms = require('./getRooms.js')
 
 module.exports = async (username, salaNome, socket)=>{
     client.hget('Rooms', salaNome, async (err, data)=>{
