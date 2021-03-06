@@ -1,5 +1,6 @@
 const notifier = require('./notificador.js')
 const client = require('./redis-client.js')
+const io = require('./socketIO')
 
 const createRoom = require('./controllers/createRoom.js')
 const removeUser = require('./controllers/removeUser.js')
@@ -8,7 +9,7 @@ const addUser = require('./controllers/addUser.js')
 
 const checkReady = require('./game/checkReady.js')
 
-module.exports = async function(socket, io) {
+module.exports = async function(socket) {
     console.log('Socket conectado')
     socket.room = ''
     let newId = socket.id

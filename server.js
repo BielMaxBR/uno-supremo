@@ -1,11 +1,10 @@
 const app = require('./src/app')
-const fs = require('fs')
-fs.exists('./src/salas.json', function(exists){
-    var obj = {}
-    var json = JSON.stringify(obj);
-    fs.writeFileSync(path='./src/salas.json', json);
-})
+    ,io = require('./src/socketIO')
+    ,socketController = require('./src/socketController.js')
+
 const porta = process.env.PORT || 3333
+
 app.listen(porta)
+io.sockets.on('connection', socketController)
 
 console.log('Escutando na porta '+porta.toString())

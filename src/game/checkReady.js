@@ -1,4 +1,5 @@
 const client = require('../redis-client.js')
+const initGame = require('./initGame.js')
 
 module.exports = async (socket) => {
     client.hget('Rooms', socket.room, (err,data) =>{
@@ -14,7 +15,7 @@ module.exports = async (socket) => {
         }
 
         if (isReady) {
-            
+            initGame(socket.room)
         }
     })
 }
