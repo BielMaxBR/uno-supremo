@@ -30,9 +30,9 @@ socket.on('updateRooms', (rooms) =>{
     roomsOn = rooms
     salas.innerHTML = ''
     for ( sala in roomsOn ) {
+        let nomeSala = roomsOn[sala]
         salas.innerHTML += '<li>'
-            +"<button style=\"\" onclick=\"connect(myName.toString(),\'"
-            +roomsOn[sala]+' '+"\')\">Entrar</button>"+'<div class=\'nomeSala\'>'+roomsOn[sala]+'</div>'+'</li>'
+            +"<button style=\"\" value=\""+roomsOn[sala].toString()+"\">Entrar</button>"+'<div class=\'nomeSala\'>'+nomeSala+'</div>'+'</li>'
     }
 })
 
@@ -66,7 +66,7 @@ socket.on('updateChat',(username, data, color) =>{
 
 function createRoom(room) {
     if (connected) {
-        socket.emit('createRoom',room)
+        socket.emit('createRoom',room.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''))
     }
 }
 
@@ -87,6 +87,10 @@ function ready() {
         socket.emit('Ready')
     }
 }
+
+document.addEventListener('click', event => {
+    console.log(event.target)
+})
 
 document.getElementById('myname').addEventListener('keyup', function(){
     myName = this.value

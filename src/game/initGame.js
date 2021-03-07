@@ -2,10 +2,11 @@ const client = require('../redis-client.js')
 const io = require('../socketIO')
 const notifier = require('../notificador.js')
 
-module.exports = async (data) => {
-    client.hget('Rooms', data, async () =>{
+module.exports = async (name) => {
+    client.hget('Rooms', name, async (err, data) =>{
         let sala = JSON.parse(data)
         sala.Playing = true
-        notifier(io,sala, "initGame")
+        client.hset('Rooms', name, JSON.stringify(sala))
+        notifier(sala, "initGame")
     })
 }
