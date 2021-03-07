@@ -9,10 +9,10 @@ module.exports = (sala,tipo, ...args) => {
             args[0].to(sala).emit('updateChat', "SERVER", args[1]+" saiu nessa sala", 'blue')
             break;
         case "enterRoom":
-            io.to(sala).emit('updateChat', "SERVER", "você entrou em "+sala, 'green')
+            io.to(sala).emit('updateChat', "SERVER", "você entrou em "+args[0], 'green')
             break;
         case "leaveRoom":
-            io.to(sala).emit('updateChat', "SERVER", "você saiu de "+sala, 'green')
+            io.to(sala).emit('updateChat', "SERVER", "você saiu de "+args[0], 'green')
             break;
         case "myTurn":
             io.to(sala).emit('updateChat', "SERVER", "agora é seu turno", 'yellow')

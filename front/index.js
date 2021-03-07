@@ -32,7 +32,7 @@ socket.on('updateRooms', (rooms) =>{
     for ( sala in roomsOn ) {
         let nomeSala = roomsOn[sala]
         salas.innerHTML += '<li>'
-            +"<button style=\"\" value=\""+roomsOn[sala].toString()+"\">Entrar</button>"+'<div class=\'nomeSala\'>'+nomeSala+'</div>'+'</li>'
+            +"<button class =\"BotaoSala\" style=\"\" value=\""+roomsOn[sala].toString()+"\">Entrar</button>"+'<div class=\'nomeSala\'>'+nomeSala+'</div>'+'</li>'
     }
 })
 
@@ -89,7 +89,9 @@ function ready() {
 }
 
 document.addEventListener('click', event => {
-    console.log(event.target)
+    if (event.target.className == "BotaoSala") {
+        connect(myName, event.target.nextElementSibling.textContent)
+    }
 })
 
 document.getElementById('myname').addEventListener('keyup', function(){

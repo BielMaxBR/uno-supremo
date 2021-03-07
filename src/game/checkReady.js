@@ -10,7 +10,7 @@ module.exports = async (socket) => {
         
         client.hset('Rooms',socket.room, JSON.stringify(sala))
 
-        let isReady = false
+        let isReady = true
 
         for ( const [key, value] of Object.entries(sala.Ready)) {
             console.log(key, value)

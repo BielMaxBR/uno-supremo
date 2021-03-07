@@ -16,7 +16,7 @@ module.exports = async (username, salaNome, socket)=>{
         
         if (socket.room != '') {
             removeUser(socket)
-            notifier(socket.room,"leaveRoom")
+            notifier(socket.id,'leaveRoom', socket.room)
         }
         if(!err) {
             let sala = {}
@@ -46,7 +46,7 @@ module.exports = async (username, salaNome, socket)=>{
             client.hset('Rooms',salaNome, JSON.stringify(ConfigSala))
             notifier(socket.room,'addUser', socket, username)
             
-            notifier(socket.room,'enterRoom')
+            notifier(socket.id,'enterRoom', socket.room)
 
             const users = Object.keys(ConfigSala.TotalUsers)
             console.log('dps ',users)
