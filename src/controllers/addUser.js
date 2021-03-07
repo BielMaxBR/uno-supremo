@@ -16,8 +16,7 @@ module.exports = async (username, salaNome, socket)=>{
         
         if (socket.room != '') {
             removeUser(socket)
-            notifier(socket,socket.room,"removeUser", socket.username)
-            notifier(socket,socket.room,"leaveRoom")
+            notifier(socket.room,"leaveRoom")
         }
         if(!err) {
             let sala = {}
@@ -28,7 +27,7 @@ module.exports = async (username, salaNome, socket)=>{
             
             let ConfigSala = JSON.parse(sala)
             console.log(ConfigSala.Players)
-            if (ConfigSala.Players[username.trim()]) { notifier(socket,socket.id,"error","esse nome já existe nessa sala"); return }
+            if (ConfigSala.Players[username.trim()]) { notifier(socket.id,"error","esse nome já existe nessa sala"); return }
 
             if (Object.keys(ConfigSala.Players).length < ConfigSala.LimitPlayers) {
                 ConfigSala.Players[username] = socket.id
@@ -43,10 +42,11 @@ module.exports = async (username, salaNome, socket)=>{
             socket.room = salaNome
 
             socket.join(socket.room)
-
+            
             client.hset('Rooms',salaNome, JSON.stringify(ConfigSala))
-            notifier(socket,socket.room,'addUser', username)
-            notifier(socket,socket.room,'enterRoom')
+            notifier(socket.room,'addUser', socket, username)
+            
+            notifier(socket.room,'enterRoom')
 
             const users = Object.keys(ConfigSala.TotalUsers)
             console.log('dps ',users)

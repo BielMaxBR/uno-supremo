@@ -24,7 +24,7 @@ module.exports = async (socket, callback)=>{
             delete ConfigSala.PlayerCards[username]
             delete ConfigSala.Ready[username]
             delete ConfigSala.TotalUsers[username]
-            notifier(socket,socket.room,"removeUser", username)
+            notifier(socket.room,"removeUser", socket, username)
             socket.leave(socket.room)
             const users = Object.keys(ConfigSala.TotalUsers)
             await socket.to(socket.room).emit('updateUsers', users)

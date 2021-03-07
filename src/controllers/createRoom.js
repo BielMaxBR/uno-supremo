@@ -19,18 +19,15 @@ module.exports = async function(nome) {
                 console.log(prefix+err);
                 return new Promisse((res)=>{ res(resEnum.ERRO) })
             }
-            
-            console.log("tem: ", data)
+  
             if (data) {
                 obj = data
             }
-
-            console.log(obj[nome])
-            if(nome.trim().length == 0) { resolve(resEnum.EMPTY);console.log('EMPTY')  }
-            if (obj[nome] != undefined) { resolve(resEnum.EXIST);console.log('EXIST')  } 
+            if(nome.trim().length == 0) { resolve(resEnum.EMPTY);console.log('EMPTY');return  }
+            if (obj[nome] != undefined) { resolve(resEnum.EXIST);console.log('EXIST');return  } 
             
             obj[nome] = JSON.stringify(new SalaClass())
-            console.log(obj)
+            console.log("sala criada")
             
             await client.hmset('Rooms', obj)
             resolve(obj) 

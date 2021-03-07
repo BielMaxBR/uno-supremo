@@ -43,13 +43,13 @@ module.exports = async function(socket) {
     await socket.on('createRoom', async nome => {await createRoom(nome).then(res=>{
         switch(res) {
             case 0:
-                notifier(socket,socket.id,"error","essa sala já existe")
-                break;
+                notifier(socket.id,"error","essa sala já existe")
+                break
             case 1:
-                notifier(socket,socket.id,"error","insira um nome na sala")
+                notifier(socket.id,"error","insira um nome na sala")
                 break;
             case 2:
-                notifier(socket,socket.id,"error","ocorreu um erro no servidor")
+                notifier(socket.id,"error","ocorreu um erro no servidor")
                 break;
             default:
                 console.log("outro: ",res)
