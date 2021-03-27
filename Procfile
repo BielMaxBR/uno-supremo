@@ -1,1 +1,1 @@
-umcard: node server.js
+umcard: npm test
