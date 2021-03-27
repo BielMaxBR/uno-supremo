@@ -1,1 +1,1 @@
-server: node server.js
+umcard: node server.js
