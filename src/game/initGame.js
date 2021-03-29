@@ -1,13 +1,20 @@
 const client = require('../redis-client.js')
-const io = require('../socketIO')
 const notifier = require('../notificador.js')
 
-module.exports = async (name) => {
-    console.log('initGame [', name,"]")
-    client.hget('Rooms', name, async (err, data) =>{
+const updateAllCards = require('./updateAllCards.js')
+
+module.exports = async (roomName) => {
+    console.log('initGame [', roomName,"]")
+    client.hget('Rooms', roomName, async (err, data) =>{
         let sala = JSON.parse(data)
         sala.Playing = true
-        client.hset('Rooms', name, JSON.stringify(sala))
-        notifier(name, "initGame")
+        
+        // enviar as cartas
+        updateAllCards(roomName)
+        // iniciar o primeiro turno
+
+
+        client.hset('Rooms', roomName, JSON.stringify(sala))
+        notifier(roomName, "initGame")
     })
 }

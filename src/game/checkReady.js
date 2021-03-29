@@ -17,7 +17,7 @@ module.exports = async (socket) => {
             if (!value && Object.entries(sala.Ready).length > 1) {
                 isReady = false
                 console.log('não tá pronto')
-                return
+                break
             } 
         }
 
