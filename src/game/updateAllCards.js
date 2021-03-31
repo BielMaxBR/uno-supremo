@@ -6,8 +6,8 @@ module.exports = (roomName) => {
         if (err) {console.error(err);return}
         
         let sala = JSON.parse(data)
-        for( let player in sala.PlayerCards) {
-            updateCards(player, 'add', 7)
+        for( let player in sala.Players) {
+            updateCards(roomName, player, 'add', 7)
         }
     })
 }

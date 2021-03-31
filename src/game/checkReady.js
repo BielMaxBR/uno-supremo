@@ -11,10 +11,12 @@ module.exports = async (socket) => {
         client.hset('Rooms',socket.room, JSON.stringify(sala))
 
         let isReady = true
-
+        if (Object.entries(sala.Ready).length <= 1) {
+            isReady = false
+        }
         for ( const [key, value] of Object.entries(sala.Ready)) {
             console.log(key, value)
-            if (!value && Object.entries(sala.Ready).length > 1) {
+            if (!value) {
                 isReady = false
                 console.log('não tá pronto')
                 break

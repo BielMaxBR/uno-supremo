@@ -20,6 +20,7 @@ let connected = false
 let myName = ''
 let roomsOn = []
 let usersOn = []
+let myCards = []
 socket.on('connect',()=>{
     connected = true
 })
@@ -37,7 +38,6 @@ socket.on('updateRooms', (rooms) =>{
 })
 
 socket.on('updateUsers', playersList =>{
-    console.log(typeof playersList)
     var players = playersList
     if (typeof playersList == "string") {
         players = [playersList]
@@ -62,6 +62,11 @@ socket.on('updateChat',(username, data, color) =>{
     }
     chat.innerHTML +="<li "+style+">"+"["+username+"]"+": "+data+"<li>"
     chat.scrollTop = chat.scrollHeight;
+})
+
+socket.on('updateCards', cartas =>{
+    myCards = cartas
+    console.log(myCards)
 })
 
 function createRoom(room) {
