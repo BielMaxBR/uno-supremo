@@ -2,6 +2,7 @@ const client = require('../redis-client.js')
 const notifier = require('../notificador.js')
 
 const updateAllCards = require('./updateAllCards.js')
+const changeTurn = require('./changeTurn.js')
 
 module.exports = async (roomName) => {
     console.log('initGame [', roomName,"]")
@@ -16,7 +17,10 @@ module.exports = async (roomName) => {
             notifier(roomName, "initGame", seg)
             if (seg > 1) {
                 setTimeout(timer, 1000, seg-1)
-            }
+            }  
+            if (seg == 1) {
+                changeTurn(roomName)
+            } 
         }
 
         timer(3)
