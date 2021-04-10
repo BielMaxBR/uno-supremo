@@ -12,9 +12,15 @@ module.exports = async (roomName) => {
         // enviar as cartas
         updateAllCards(roomName)
         // iniciar o primeiro turno
+        function timer(seg) {
+            notifier(roomName, "initGame", seg)
+            if (seg > 1) {
+                setTimeout(timer, 1000, seg-1)
+            }
+        }
 
+        timer(3)
 
         client.hset('Rooms', roomName, JSON.stringify(sala))
-        notifier(roomName, "initGame")
     })
-}
+} 
