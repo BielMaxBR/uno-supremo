@@ -69,6 +69,10 @@ socket.on('updateCards', cartas =>{
     console.log(myCards)
 })
 
+socket.on('turn', (text)=>{
+    console.log(text)
+})
+
 function createRoom(room) {
     if (connected) {
         socket.emit('createRoom',room.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''))
