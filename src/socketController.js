@@ -8,6 +8,7 @@ const getRooms = require('./controllers/getRooms.js')
 const addUser = require('./controllers/addUser.js')
 
 const checkReady = require('./game/checkReady.js')
+const checkTurn = require('./game/checkTurn.js')
 
 module.exports = async function(socket) {
     console.log('Socket conectado')
