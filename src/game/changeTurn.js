@@ -12,6 +12,7 @@ module.exports = (roomName) => {
         let players = sala.Players
         io.to(Object.values(players)[sala.Turn]).emit('turn', 'é seu turno')
         notifier(Object.values(players)[sala.Turn], 'yourTurn')
+        notifier(roomName, 'turnIs', io.sockets.sockets.get(Object.values(players)[sala.Turn]), Object.keys(players)[sala.Turn])
         client.hset('Rooms', roomName, JSON.stringify(sala))
     })
 }

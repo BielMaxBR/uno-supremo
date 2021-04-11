@@ -10,17 +10,17 @@ module.exports = async (roomName) => {
         let sala = JSON.parse(data)
         sala.Playing = true
         
-        // enviar as cartas
-        updateAllCards(roomName)
-        // iniciar o primeiro turno
         function timer(seg) {
-            notifier(roomName, "initGame", seg)
-            if (seg > 1) {
-                setTimeout(timer, 1000, seg-1)
-            }  
-            if (seg == 1) {
+            if (seg < 1) {
+                // enviar as cartas
+                updateAllCards(roomName)
+                // iniciar o primeiro turno
                 changeTurn(roomName)
             } 
+            else if (seg >= 1) {
+                notifier(roomName, "initGame", seg)
+                setTimeout(timer, 1000, seg-1)
+            }  
         }
 
         timer(3)

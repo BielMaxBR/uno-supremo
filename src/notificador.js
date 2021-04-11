@@ -24,7 +24,10 @@ module.exports = (sala,tipo, ...args) => {
             io.to(sala).emit('updateChat', "SERVER", "A partida vai começar em: "+args[0].toString(), 'green')
             break;
         case "yourTurn":
-            io.to(sala).emit('updateChat', "SERVER", "É o seu turno", 'green')
+            io.to(sala).emit('updateChat', "SERVER", "É o seu turno", 'blue')
+            break;
+        case 'turnIs':
+            args[0].to(sala).emit('updateChat', "SERVER", "É o turno de: "+args[1].toString(), 'blue')
             break;
         case "error":
             io.to(sala).emit('updateChat', "SERVER", "erro: "+args[0], 'red')
