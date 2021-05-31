@@ -24,7 +24,7 @@
     "redis": "^3.1.1",
     "redis-json": "^5.0.0",
     "socket.io": "^3.0.5",
-    "ws": "^7.4.2"
+    "ws": "^7.4.6"
   },
   "nodemonConfig": {
     "ignore": [
