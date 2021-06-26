@@ -1,8 +1,8 @@
 const express = require('express')
-    ,path = require('path')
-    ,http = require('http')
-    ,app = express()
-    ,server = http.createServer(app)
+    , path = require('path')
+    , http = require('http')
+    , app = express()
+    , server = http.createServer(app)
 
 const router = express.Router()
 

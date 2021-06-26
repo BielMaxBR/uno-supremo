@@ -10,14 +10,14 @@ const addUser = require('./controllers/addUser.js')
 const checkReady = require('./game/checkReady.js')
 const checkTurn = require('./game/checkTurn.js')
 
-module.exports = async function(socket) {
+module.exports = async function (socket) {
     console.log('Socket conectado')
     socket.room = ''
     let newId = socket.id
     await client.lpush('PlayerLists', newId)
 
-    await client.lrange('PlayerLists', 0 , -1, async (err, data)=>{
-        
+    await client.lrange('PlayerLists', 0, -1, async (err, data) => {
+
         console.log(data)
     })
 
@@ -36,40 +36,41 @@ module.exports = async function(socket) {
                 // console.log('wow!', salas)
             })
         }
-        catch(err) {
+        catch (err) {
             console.log(err)
         }
     }
-    
-    await socket.on('createRoom', async nome => {await createRoom(nome).then(res=>{
-        switch(res) {
-            case 0:
-                notifier(socket.id,"error","essa sala já existe")
-                break
-            case 1:
-                notifier(socket.id,"error","insira um nome na sala")
-                break;
-            case 2:
-                notifier(socket.id,"error","ocorreu um erro no servidor")
-                break;
-            default:
-                console.log("outro: ",res)
-                updateRooms()
-                break;
+
+    await socket.on('createRoom', async nome => {
+        await createRoom(nome).then(res => {
+            switch (res) {
+                case 0:
+                    notifier(socket.id, "error", "essa sala já existe")
+                    break
+                case 1:
+                    notifier(socket.id, "error", "insira um nome na sala")
+                    break;
+                case 2:
+                    notifier(socket.id, "error", "ocorreu um erro no servidor")
+                    break;
+                default:
+                    console.log("outro: ", res)
+                    updateRooms()
+                    break;
             }
 
         })
     })
 
-    await socket.on('Ready', () =>{ checkReady(socket) })
+    await socket.on('Ready', () => { checkReady(socket) })
 
-    await socket.on('addUser', (username, sala)=>{ addUser(username, sala, socket); console.log('addUser\n') })
-    
-    await socket.on('disconnect', ()=>{
+    await socket.on('addUser', (username, sala) => { addUser(username, sala, socket); console.log('addUser\n') })
+
+    await socket.on('disconnect', () => {
         // disconnectPlayer
         // delete TotalPlayers[socket.id]
         client.lrem('PlayerLists', 1, socket.id)
-        removeUser(socket, (sala, nome) =>{
+        removeUser(socket, (sala, nome) => {
             if (Object.keys(sala.TotalUsers).length == 0) {
                 client.hdel('Rooms', nome)
                 updateRooms()

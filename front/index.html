@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
             margin-top: 5%;
             font-family: Arial, Helvetica, sans-serif;
         }
+
         canvas {
             background: #000;
             margin: auto;
@@ -28,23 +30,25 @@
 
         #esquerda {
             margin: auto;
-            float:left;
-            position:absolute;
+            float: left;
+            position: absolute;
             bottom: 0px;
             left: 0px;
             margin-bottom: 1%;
             margin-left: 1%;
             text-decoration: underline;
         }
+
         #direita {
             margin: auto;
-            float:right;
-            position:absolute;
+            float: right;
+            position: absolute;
             bottom: 0px;
             right: 0px;
             margin-bottom: 1%;
             margin-right: 1%;
         }
+
         #roomList {
             border: 2px solid grey;
             margin-bottom: 5px;
@@ -67,11 +71,11 @@
             margin-left: 150px;
         }
 
-        #chat {    
+        #chat {
             margin-top: 5px;
             height: 320px;
             border: 2px solid grey;
-            width: 300px; 
+            width: 300px;
             bottom: 0px;
             right: 0px;
             font-size: small;
@@ -83,7 +87,7 @@
             /* text-shadow:0 1px #808d93, -1px 0 #cdd2d5, -1px 2px #808d93, -2px 1px #cdd2d5, -2px 3px #808d93 */
         }
 
-        ul > :first-child {
+        ul> :first-child {
             margin-top: auto;
         }
 
@@ -97,7 +101,7 @@
             Left: 0px;
             right: 0px;
             overflow-y: auto;
-            margin: auto; 
+            margin: auto;
         }
 
         li {
@@ -111,36 +115,36 @@
         .inputText {
             width: -webkit-fill-available;
         }
-        
+
         .nomeSala {
-            margin-left:5px;
+            margin-left: 5px;
         }
 
 
         button {
-            margin-left:10px;
+            margin-left: 10px;
         }
-
     </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/web-socket-js/1.0.0/web_socket.min.js" integrity="sha512-jtr9/t8rtBf1Sv832XjG1kAtUECQCqFnTAJWccL8CSC82VGzkPPih8rjtOfiiRKgqLXpLA1H/uQ/nq2bkHGWTQ==" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
-<link rel="icon" 
-      type="image/png" 
-      href="./sprites/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-socket-js/1.0.0/web_socket.min.js"
+        integrity="sha512-jtr9/t8rtBf1Sv832XjG1kAtUECQCqFnTAJWccL8CSC82VGzkPPih8rjtOfiiRKgqLXpLA1H/uQ/nq2bkHGWTQ=="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    <link rel="icon" type="image/png" href="./sprites/favicon.png">
 </head>
+
 <body>
     <div id="esquerda">
         <div id="name">
             <h2 style="margin: auto;">Nome Aqui</h2>
-            <input class="inputText" id="myname" placeholder="escreve um nome ae" value=""/>
+            <input class="inputText" id="myname" placeholder="escreve um nome ae" value="" />
         </div>
         <div id="roomList">
             <ul id="rooms"></ul>
         </div>
         <div id="createRoom">
             <h2 style="margin: auto;">crie uma sala</h2>
-            <input class="inputText" id="myroom" placeholder="escreve uma sala ae" value="sala"/>
+            <input class="inputText" id="myroom" placeholder="escreve uma sala ae" value="sala" />
             <!-- <ul id="rooms"><li>sala1</li><li>sala2</li></ul> -->
         </div>
     </div>
@@ -152,16 +156,16 @@
         </div>
         <div id="chat">
             <ul id="messages" tabindex="1"></ul>
-            <input class="inputText" id="mytext" placeholder="escreve algo ae"/>
+            <input class="inputText" id="mytext" placeholder="escreve algo ae" />
         </div>
     </div>
 
     <div style="display:none;">
-    <img id="source"
-        src="./sprites/obra.png">
+        <img id="source" src="./sprites/obra.png">
     </div>
 
     <!-- <script src="https://pixijs.download/v5.3.6/pixi.min.js"></script> -->
-    <script src="./index.js"></script> 
+    <script src="./index.js"></script>
 </body>
+
 </html>

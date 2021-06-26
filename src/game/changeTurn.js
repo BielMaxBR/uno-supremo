@@ -3,8 +3,8 @@ const io = require('../socketIO')
 const notifier = require('../notificador.js')
 
 module.exports = (roomName) => {
-    client.hget('Rooms', roomName, async (err, data) =>{
-        if (err) {console.error(err);return}
+    client.hget('Rooms', roomName, async (err, data) => {
+        if (err) { console.error(err); return }
 
         let sala = JSON.parse(data)
 

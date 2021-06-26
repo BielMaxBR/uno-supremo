@@ -1,4 +1,4 @@
-module.exports = function(Configs) {
+module.exports = function (Configs) {
     if (!Configs) {
         this.TotalUsers = {}
         this.LimitPlayers = 4
@@ -16,32 +16,32 @@ module.exports = function(Configs) {
         this.LimitPlayers = Configs.LimitPlayers
         this.Turn = Configs.Turn
         this.Direction = Configs.Direction
-        this.Players = Configs.Players 
-        this.Spectators = Configs.Spectators 
-        this.PlayerCards = Configs.PlayerCards 
-        this.Ready = Configs.Ready 
-        this.TopCard = Configs.TopCard 
-        this.Baralho = Configs.Baralho 
+        this.Players = Configs.Players
+        this.Spectators = Configs.Spectators
+        this.PlayerCards = Configs.PlayerCards
+        this.Ready = Configs.Ready
+        this.TopCard = Configs.TopCard
+        this.Baralho = Configs.Baralho
         this.Playing = Configs.Playing
     }
 
     function criarBaralho() {
         var baralhoTotal = []
-        var cores = ["r","g","y","b"]
+        var cores = ["r", "g", "y", "b"]
         // cc é pra escolher uma cor
-        var coringas = ["+4","cc"]
+        var coringas = ["+4", "cc"]
         // jp é pra pular uma pessoa
         // in é pra inverter a sequência
-        var especiais = ["+2", "jp","in"]
+        var especiais = ["+2", "jp", "in"]
         for (var i = 0; i < cores.length; i++) {
-            baralhoTotal.push(cores[i]+"0")
+            baralhoTotal.push(cores[i] + "0")
             for (var j = 1; j < 10; j++) {
-                baralhoTotal.push(cores[i]+j.toString()) 
-                baralhoTotal.push(cores[i]+j.toString())
+                baralhoTotal.push(cores[i] + j.toString())
+                baralhoTotal.push(cores[i] + j.toString())
             }
             for (var j = 0; j < especiais.length; j++) {
-                baralhoTotal.push(cores[i]+especiais[j])
-                baralhoTotal.push(cores[i]+especiais[j])
+                baralhoTotal.push(cores[i] + especiais[j])
+                baralhoTotal.push(cores[i] + especiais[j])
             }
         }
         for (var j = 0; j < 4; j++) {
